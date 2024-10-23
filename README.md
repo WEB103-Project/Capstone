@@ -29,19 +29,25 @@ The idea is inspired by both our and family and friends experiences when buying 
 
 ## Features
 
-### [Name of Feature 1]
+### Car Specifications
 
 [short description goes here]
 
 [gif goes here]
 
-### [Name of Feature 2]
+### Review and Rating System
 
 [short description goes here]
 
 [gif goes here]
 
-### [Name of Feature 3]
+### Highlighted Common Issues
+
+[short description goes here]
+
+[gif goes here]
+
+### Community Forum and Q&A
 
 [short description goes here]
 
@@ -49,6 +55,39 @@ The idea is inspired by both our and family and friends experiences when buying 
 
 ### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
 
+
+Car Comparison Tool
+
+VIN Decoder
+
+Fuel Efficiency and Performance Analytics
+
 ## Installation Instructions
 
-[instructions go here]
+First, clone the repo:
+
+```sh
+git clone https://github.com/WEB103-Project/Capstone.git
+cd Capstone
+```
+
+Then install the dependencies both the `client` and the `server` requires. Once that is done, run the client and server
+
+##### For the server
+
+```sh
+cd server
+npm install
+npm run start
+```
+
+##### For the client
+
+```sh
+cd client
+npm install
+npm run dev
+```
+
+
+

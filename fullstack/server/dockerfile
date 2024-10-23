@@ -1,0 +1,12 @@
+
+FROM postgres:latest
+
+# Set environment variables
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=secret
+ENV POSTGRES_DB=mydb
+
+# Copy SQL scripts into the Docker container's init directory
+COPY ./scripts/*.sql /docker-entrypoint-initdb.d/
+
+# The SQL scripts in this folder are run automatically when the container starts

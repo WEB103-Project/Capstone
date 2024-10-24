@@ -13,19 +13,26 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 - [x] In `readme.md`: complete the **Description and Purpose** section
 - [x] In `readme.md`: complete the **Inspiration** section
 - [x] In `readme.md`: list all features you intend to include in your app (in future units, you will check off features as you complete them and add GIFs demonstrating the features)
-- [ ] In `planning/user_stories.md`: add all user stories
-- [ ] In this document, complete the **Reflection** section below
+- [x] In `planning/user_stories.md`: add all user stories
+- [x] In this document, complete the **Reflection** section below
 
 ## Reflection
 
 ### 1. What went well during this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Angel: I think that setting up the boilerplate code and researching the topic in question was really fun. It went smooth and had a lot to share with the team during meetings. Also meetings were very impactful and the team went forward sharing ideas that we believe were doable with our skill.
+
+Patrick:
+
 
 ### 2. What were some challenges your group faced in this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Angel: Time, we are at different time zones with different situations. So setting a time where we can all be in one meeting was a bit challenging but doable. It helped that we were flexible and were quick to adjust our schedules to get things moving.
+
+Patrick:
 
 ### 3. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Angel: I think having TFs that could review our design would be great, as we can quickly adjust it to make the UI friendlier
+
+Patrick:

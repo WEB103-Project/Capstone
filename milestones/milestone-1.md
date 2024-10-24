@@ -24,6 +24,8 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 
 - Achieved a clear understanding of the project requirements and scope, including baseline and custom features. The group collaborated effectively, ensuring everyone understood their roles and responsibilities.
 
+- Enjoyed the different perspectives and thought processes each team member offered.
+
 
 ### 2. What were some challenges your group faced in this unit?
 

@@ -31,36 +31,56 @@ The idea is inspired by both our and family and friends experiences when buying 
 
 ### Car Specifications
 
-[short description goes here]
+Shows car relevant information, such as:
+- MPG
+- Year
+- Make
+- Model
+- Body Type
+- Picture
+- Engine Type
+- HP
+- Cargo Volume
+- Price Estimate
 
 [gif goes here]
 
 ### Review and Rating System
 
-[short description goes here]
+- Users will rate cars with a scale system from 1 (unreliable) to 5 (reliable). This scale applies to a set of categories such as
+    - commodity
+    - mileage
+    - repairability
+    - car resiliance (how often the car can run without breaking down)
+
+- Users will also be able to comment about their experience with said car. Other users can reply to comments in regard with their experience as well.
 
 [gif goes here]
 
 ### Highlighted Common Issues
 
-[short description goes here]
+- Utilizing a service like the OpenAI API, key aspects of a car such as common issues users have experienced with said car will be reported at the top of the site.
 
 [gif goes here]
 
-### Community Forum and Q&A
+### Car Comparison Tool
 
-[short description goes here]
+- The User can compare two distinct cars side by side and see their difference in a desired characteristic, such as mileage, horsepower, price, or reliability.
 
 [gif goes here]
 
 ### [ADDITIONAL FEATURES GO HERE - ADD ALL FEATURES HERE IN THE FORMAT ABOVE; you will check these off and add gifs as you complete them]
 
+### Community Forum and Q&A
 
-Car Comparison Tool
+Tentative
 
-VIN Decoder
+## VIN Decoder
 
-Fuel Efficiency and Performance Analytics
+Users can find a car using the vehicle identification number or VIN
+
+## Fuel Efficiency and Performance Analytics 
+- tentative, find a way to access this data from a car's computer
 
 ## Installation Instructions
 
@@ -91,3 +111,8 @@ npm run dev
 
 
 
+Inspiration
+
+https://www.kbb.com/acura/integra/1993/
+
+https://www.edmunds.com/volkswagen/beetle/2012/review/

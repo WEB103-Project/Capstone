@@ -4,18 +4,31 @@ Reference the Creating an Entity Relationship Diagram final project guide in the
 
 ## List of Pages
 
+
 [👉🏾👉🏾👉🏾 List the pages you expect to have in your app, with a ⭐ next to pages you have wireframed]
 
-## Wireframe 1: [page title]
+## Wireframe 1: Car Search
 
-[👉🏾👉🏾👉🏾 include wireframe 1]
+![](./search-cars.png)
 
-## Wireframe 2: [page title]
+## Wireframe 2: Login Page
 
-[👉🏾👉🏾👉🏾 include wireframe 2]
+![](./log-in.png)
 
-## Wireframe 3: [page title]
+## Wireframe 3: Sign up Page
+
+![](./sign-up-part-1.png)
+
+[👉🏾👉🏾👉🏾 include more wireframes as desired]
+
+## Wireframe 4: Landing Page
 
 [👉🏾👉🏾👉🏾 include wireframe 3]
 
 [👉🏾👉🏾👉🏾 include more wireframes as desired]
+
+## Wireframe 5: Car Information Page
+
+![](./car-info-top.png)
+![](./car-info-review-scores.png)
+

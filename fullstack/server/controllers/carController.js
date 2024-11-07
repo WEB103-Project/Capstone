@@ -1,117 +1,122 @@
 import { pool } from "../config/db.js";
+import { Cars } from "../models/model.js";
 
-const carController = () => {};
+const carController = {};
 
 carController.getAllCars = async (req, res) => {
   try {
-    const result = await pool.query(`
-        SELECT 
-        c.id AS car_id,
-        c.name AS car_name,
-        cb.id AS base_model_id,
-        cb.model AS base_model_name,
-        cb.price AS base_model_price,
-        i.id AS interior_id,
-        i.price AS interior_price,
-        e.id AS exterior_id,
-        e.price AS exterior_price,
-        w.id AS wheel_id,
-        w.price AS wheel_price
-      FROM cars c
-      JOIN car_base cb ON c.base_model_id = cb.id
-      JOIN interiors i ON c.interior_type_id = i.id
-      JOIN exteriors e ON c.exterior_type_id = e.id
-      JOIN wheels w ON c.wheel_type_id = w.id`);
+    const page = parseInt(req.query.page) || 1;
+    const size = parseInt(req.query.size) || 10;
 
-    const response = result.rows.map((row) => {
-      const {
-        car_id,
-        car_name,
-        base_model_id,
-        base_model_price,
-        interior_id,
-        interior_price,
-        exterior_id,
-        exterior_price,
-        wheel_id,
-        wheel_price,
-      } = row;
-      const totalPrice =
-        base_model_price + interior_price + exterior_price + wheel_price;
-      return {
-        carId: car_id,
-        baseModelId: base_model_id,
-        carName: car_name,
-        interiorTypeId: interior_id,
-        exteriorTypeId: exterior_id,
-        wheelTypeId: wheel_id,
-        price: totalPrice,
-      };
+    const start = (Number(page) - 1) * Number(size);
+    const end = start + Number(size) - 1;
+
+    const result = await pool.query(
+      `
+        SELECT
+          c.id,
+          c.model,
+          c.make,
+          c.year,
+          c.body_type,
+          p.id AS pic_id,
+          p.url
+        FROM Cars c
+        JOIN CarGalleries cg ON c.id = cg.car_id
+        JOIN Pictures p ON cg.id = p.gallery_id
+        ORDER BY c.make ASC
+
+      `,
+      [start, end] // Pass the limit and offset values as parameters
+    );
+
+    const cars = result.rows.map((row) => {
+      row.id,
+        row.model,
+        row.make,
+        row.year,
+        row.body_type,
+        row.pic_id,
+        "/api/cars/".concat(row.id);
     });
-    res.status(200).json(response);
+
+    res.status(200).json(cars);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
 carController.createCar = async (req, res) => {
   try {
-    const { name, baseModelId, interiorId, exteriorId, wheelId, price } =
-      req.body;
+    const {
+      model,
+      make,
+      year,
+      body_type,
+      price_estimate,
+      horsepower,
+      mileage,
+      seats,
+      cargo_volume,
+      engine_type,
+      drivetrain,
+    } = req.body;
 
-    // Check if the base model, interior, exterior, and wheel exist
-    const checkBaseModelQuery = "SELECT * FROM car_base WHERE id = $1";
-    const baseModelResult = await pool.query(checkBaseModelQuery, [
-      baseModelId,
+    const checkIfCarExistsQuery = `SELECT * from Cars WHERE model = $1 AND make = $2 AND year = $3 AND body_type = $4 LIMIT 1`;
+    const checkCarRes = await pool.query(checkIfCarExistsQuery, [
+      model,
+      make,
+      year,
+      body_type,
     ]);
-    if (baseModelResult.rowCount === 0) {
-      return res.status(404).json({ error: "Base model not found" });
+
+    if (checkCarRes === 1) {
+      return res.status(404).json({ error: "Car already exists" });
     }
 
-    const checkInteriorQuery = "SELECT * FROM interiors WHERE id = $1";
-    const interiorResult = await pool.query(checkInteriorQuery, [interiorId]);
-    if (interiorResult.rowCount === 0) {
-      return res.status(404).json({ error: "Interior type not found" });
-    }
-
-    const checkExteriorQuery = "SELECT * FROM exteriors WHERE id = $1";
-    const exteriorResult = await pool.query(checkExteriorQuery, [exteriorId]);
-    if (exteriorResult.rowCount === 0) {
-      return res.status(404).json({ error: "Exterior type not found" });
-    }
-
-    const checkWheelQuery = "SELECT * FROM wheels WHERE id = $1";
-    const wheelResult = await pool.query(checkWheelQuery, [wheelId]);
-    if (wheelResult.rowCount === 0) {
-      return res.status(404).json({ error: "Wheel type not found" });
-    }
-
-    // Calculate the total price
-    const totalPrice =
-      parseFloat(baseModelResult.rows[0].price) +
-      parseFloat(interiorResult.rows[0].price) +
-      parseFloat(exteriorResult.rows[0].price) +
-      parseFloat(wheelResult.rows[0].price);
-
-    // Insert the car
     const carQuery = `
-      INSERT INTO cars (name, base_model_id, interior_type_id, exterior_type_id, wheel_type_id, price)
-      VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING id
-    `;
-    const carResult = await pool.query(carQuery, [
-      name,
-      baseModelId,
-      interiorId,
-      exteriorId,
-      wheelId,
-      totalPrice,
+    INSERT INTO Cars (
+      model,
+      make,
+      year,
+      body_type,
+      price_estimate
+    ) VALUES (
+      $1, $2, $3, $4, $5
+      ) RETURNING id`;
+    const carRes = await pool.query(carQuery, [
+      model,
+      make,
+      year,
+      body_type,
+      price_estimate,
     ]);
 
-    const carId = carResult.rows[0].id;
+    const carSpecsQuery = `
+    INSERT INTO CarSpecs (
+      horsepower,
+      mileage,
+      seats,
+      car_id
+      cargo_volume,
+      engine_type,
+      drivetrain
+    ) VALUES (
+      $1, $2, $3, $4, $5, $6, $7
+    ) RETURNING id`;
+    const CarSpecsRes = await pool.query(carSpecsQuery, [
+      horsepower,
+      mileage,
+      seats,
+      carRes.rows[0].id,
+      cargo_volume,
+      engine_type,
+      drivetrain,
+    ]);
+
     res.status(201).json({
-      message: "Car created successfully",
-      carId: carId,
+      message: "Car created sucessfully",
+      carId: CarSpecsRes.rows[0].id,
     });
   } catch (error) {
     console.error("Error creating car:", error);
@@ -119,43 +124,82 @@ carController.createCar = async (req, res) => {
   }
 };
 
-carController.getCar = async (req, res) => {
-  console.log("TEST");
-  
-  const { carId } = req.params;
+carController.createLogo = async (req, res) => {
   try {
-    const query = `
-        SELECT 
-        c.id,
-        c.name,
-        cb.base_model,
-        cb.make,
-        cb.year,
-        cb.bodyStyle,
-        i.material AS interior_material,
-        i.color AS interior_color,
-        e.finish AS exterior_finish,
-        e.color AS exterior_color,
-        w.name AS wheels,
-        FROM cars c
-      JOIN car_base cb ON c.base_model_id = cb.id
-      JOIN interiors i ON c.interior_type_id = i.id
-      JOIN exteriors e ON c.exterior_type_id = e.id
-      JOIN wheels w ON c.wheel_type_id = w.id
-      WHERE c.id = $1 LIMIT 1`;
+    const { make, logo } = req.query;
 
-    const values = [parseInt(carId)];
-    const results = await pool.query(query, values);
+    const logoQuery = `
+    INSERT INTO CarLogos (
+      logo,
+      make,
+    ) VALUES (
+     $1, $2
+    ) RETURNING id
+    `;
+    const logoRes = await pool.query(logoQuery, [make, logo]);
 
-    res.status(201).json(results.rows);
+    res.status(201).json({
+      message: "Car logo created sucessfully",
+      carId: logoRes.rows[0].id,
+    });
+  } catch (error) {
+    console.error("Error creating car:", error);
+    res.status(409).json({ error: "Failed to create car" });
+  }
+};
+
+
+carController.createCarGallery = async (req, res) => {
+  try {
+    let { car_id, gallery_id, pictures } = req.query;
+
+    if (isNaN(gallery_id)) {
+      const galleryQuery = `
+      INSERT INTO CarGalleries (
+        car_id
+      ) VALUES (
+        $1
+      ) RETURNING id
+      `
+      const galleryRes = await pool.query(galleryQuery, [car_id])
+      gallery_id = galleryRes.rows[0].id;
+    }
+    const pictureQuery = `
+    INSERT INTO Pictures (
+      url,
+      gallery
+    ) VALUES (
+     $1, $2
+    ) RETURNING id
+    `
+    
+    let picturesIds = []
+    pictures.map(async row => {
+      const picturesRes = await pool.query(pictureQuery, [row.url, gallery_id])
+      picturesIds.push({
+        "id": picturesRes.rows[0].id,
+        "url": row.url
+      })
+    })
+    res.status(200).json({
+      "message": "Gallery is updated sucessfully",
+      "gallery_id": gallery_id,
+      "car_id": car_id,
+      "pictures": picturesIds
+    })
+  } catch (error) {
+    console.error("Error updating car:", error);
+    res.status(400).json({ error: error.message });
+  }
+}
+
+carController.getCar = async (req, res) => {
+  const { id } = req.params;
+
+  try {
   } catch (error) {
     res.status(409).json({ error: error.message });
   }
 };
-
-// Remember to do these
-carController.deleteCar = async (req, res) => {};
-
-carController.updateCar = async (req, res) => {};
 
 export default carController;

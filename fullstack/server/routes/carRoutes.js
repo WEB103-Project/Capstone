@@ -6,8 +6,6 @@ const carRouter = express.Router();
 carRouter.get("/", carController.getAllCars);
 carRouter.post("/", carController.createCar);
 carRouter.get("/:id", carController.getCar);
-
-// carRouter.put("/cars/:id", carController.updateCar);
-// carRouter.delete("/cars/:id", carController.deleteCar);
+carRouter.post("/gallery", carController.createCarGallery);
 
 export default carRouter;

@@ -5,6 +5,7 @@ import ViewCars from "./pages/ViewCars";
 import EditCar from "./pages/EditCar";
 import CreateCar from "./pages/CreateCar";
 import CarDetails from "./pages/CarDetails";
+import CarSearch from "./pages/CarSearch";
 function App() {
   let element = useRoutes([
     {
@@ -23,13 +24,17 @@ function App() {
       path: "/edit/:id",
       element: <EditCar title="BOLT BUCKET | Edit" />,
     },
+    {
+      path: "/:make",
+      element: <CarSearch />
+    }
   ]);
 
   return (
     <>
       <div className="flex flex-wrap gap-4 items-center">
         <Navigation />
-        <div>{element}</div>
+        <div className="w-full">{element}</div>
       </div>
     </>
   );

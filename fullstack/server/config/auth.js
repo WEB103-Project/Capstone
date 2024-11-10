@@ -1,4 +1,3 @@
-const passport = require('passport');
 // Import required modules
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;

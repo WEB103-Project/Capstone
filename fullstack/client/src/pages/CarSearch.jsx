@@ -27,18 +27,7 @@ function CarSearch() {
           <BreadcrumbItem>Home</BreadcrumbItem>
           <BreadcrumbItem>Make</BreadcrumbItem>
         </Breadcrumbs>
-        <Divider className="my-4" />
       </div>
-      <div className="flex">
-        <Image
-          width={200}
-          height={200}
-          className="object-cover"
-          alt="NextUI hero Image"
-          src="https://nextui.org/images/hero-card-complete.jpeg"
-        />
-        <p>Make beautiful websites regardless of your design experience.</p>
-        </div>
         <Divider className="my-4"/>
         <div>
             <Navbar

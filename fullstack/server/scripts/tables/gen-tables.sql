@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS CarLogos (
   id INT NOT NULL PRIMARY KEY,
   logo TEXT,
+  country VARCHAR(64),
   make VARCHAR(32) UNIQUE
 );
 
@@ -8,8 +9,13 @@ CREATE TABLE IF NOT EXISTS Cars (
     id INT NOT NULL PRIMARY KEY,
     make VARCHAR(32) REFERENCES CarLogos(make),
     model VARCHAR(32),
-    year INT,
-    body_type VARCHAR(32)
+    year INT
+);
+
+CREATE TABLE IF NOT EXISTS CarBodyTypes (
+    id INT NOT NULL PRIMARY KEY,
+    car_id INT NOT NULL REFERENCES Cars(id),
+    body_type VARCHAR(64)
 );
 
 DO $$

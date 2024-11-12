@@ -18,8 +18,8 @@ DROP TABLE IF EXISTS CarLogos;
 DROP TABLE IF EXISTS Users;
 
 -- Drop ENUM types if they already exist
-DO $$ BEGIN
-    DROP TYPE IF EXISTS transmission_type;
-    DROP TYPE IF EXISTS drivetrain_type;
-    DROP TYPE IF EXISTS user_type;
-END $$;
+
+DROP TYPE IF EXISTS transmission_type;
+DROP TYPE IF EXISTS drivetrain_type;
+DROP TYPE IF EXISTS user_type;
+

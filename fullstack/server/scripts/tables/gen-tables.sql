@@ -1,25 +1,24 @@
 CREATE TABLE IF NOT EXISTS CarLogos (
-  id INT NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   logo TEXT,
   country VARCHAR(64),
   make VARCHAR(32) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS Cars (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     make VARCHAR(32) REFERENCES CarLogos(make),
     model VARCHAR(32),
     year INT
 );
 
 CREATE TABLE IF NOT EXISTS CarBodyTypes (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT NOT NULL REFERENCES Cars(id),
     body_type VARCHAR(64)
 );
 
-DO $$
-BEGIN
+DO $$ BEGIN
    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'transmission_type') THEN
        CREATE TYPE transmission_type AS ENUM ('MANUAL', 'AUTOMATIC', 'SEMI-AUTOMATIC');
    END IF;
@@ -35,32 +34,32 @@ END $$;
 
 
 CREATE TABLE IF NOT EXISTS Mileage (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     city INT,
     highway INT
 );
 
 CREATE TABLE IF NOT EXISTS Performance (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     horsepower VARCHAR(64),
     torque VARCHAR(64),
     engine VARCHAR(64)
 );
 
 CREATE TABLE IF NOT EXISTS SpaceVolume (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     cargo_capacity FLOAT,
     front_head_room FLOAT,
     front_leg_room FLOAT,
     front_shoulder_room FLOAT,
     curb_weight FLOAT,
-    overral_width FLOAT,
+    overall_width FLOAT,
     overall_length FLOAT
 ); 
 
 CREATE TABLE IF NOT EXISTS CarSpecs (
-    id INT NOT NULL PRIMARY KEY,
-    horsepower INT REFERENCES Performance(id),
+    id SERIAL PRIMARY KEY,
+    performance INT REFERENCES Performance(id),
     mileage INT REFERENCES Mileage(id),
     volume INT REFERENCES SpaceVolume(id),
     seats INT,
@@ -71,7 +70,7 @@ CREATE TABLE IF NOT EXISTS CarSpecs (
 );
 
 CREATE TABLE IF NOT EXISTS Users (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     username user_type,
     email VARCHAR(64),
     first_name VARCHAR(32),
@@ -81,7 +80,7 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 CREATE TABLE IF NOT EXISTS CarReview (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES Users(id),
     car_id INT NOT NULL REFERENCES Cars(id),
     review_score FLOAT DEFAULT 0.0,
@@ -92,7 +91,7 @@ CREATE TABLE IF NOT EXISTS CarReview (
 );
 
 CREATE TABLE IF NOT EXISTS CarReplies (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT NOT NULL REFERENCES Users(id),
     review_comment TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -103,7 +102,7 @@ CREATE TABLE IF NOT EXISTS CarReplies (
 );
 
 CREATE TABLE IF NOT EXISTS RepairGuides (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT REFERENCES Cars(id) DEFAULT NULL,
     user_id INT NOT NULL REFERENCES Users(id),
     title TEXT,
@@ -114,25 +113,25 @@ CREATE TABLE IF NOT EXISTS RepairGuides (
 );
 
 CREATE TABLE IF NOT EXISTS RepairGuideGalleries (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     guide_id INT NOT NULL REFERENCES RepairGuides(id),
     description TEXT
 );
 
 CREATE TABLE IF NOT EXISTS CarGalleries (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT NOT NULL REFERENCES Cars(id)
 );
 
 CREATE TABLE IF NOT EXISTS Pictures (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     url TEXT,
     gallery_id INT DEFAULT NULL REFERENCES CarGalleries(id),
     repair_guide_id INT DEFAULT NULL REFERENCES RepairGuideGalleries(id)
 );
 
 CREATE TABLE IF NOT EXISTS CarAnalytics (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT NOT NULL REFERENCES Cars(id),
     last_serviced TIMESTAMP,
     technical_issues TEXT,
@@ -140,7 +139,7 @@ CREATE TABLE IF NOT EXISTS CarAnalytics (
 );
 
 CREATE TABLE IF NOT EXISTS CarCommonIssues (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT NOT NULL REFERENCES Cars(id),
     issue_title TEXT,
     issue_description TEXT,
@@ -149,7 +148,7 @@ CREATE TABLE IF NOT EXISTS CarCommonIssues (
 );
 
 CREATE TABLE IF NOT EXISTS CarPriceHistories (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     car_id INT NOT NULL REFERENCES Cars(id),
     price FLOAT,
     date_recorded TIMESTAMP

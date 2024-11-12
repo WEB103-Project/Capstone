@@ -5,26 +5,13 @@ CREATE TABLE IF NOT EXISTS CarLogos (
   make VARCHAR(32) UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS Cars (
-    id SERIAL PRIMARY KEY,
-    make VARCHAR(32) REFERENCES CarLogos(make),
-    model VARCHAR(32),
-    year INT
-);
-
-CREATE TABLE IF NOT EXISTS CarBodyTypes (
-    id SERIAL PRIMARY KEY,
-    car_id INT NOT NULL REFERENCES Cars(id),
-    body_type VARCHAR(64)
-);
-
 DO $$ BEGIN
    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'transmission_type') THEN
        CREATE TYPE transmission_type AS ENUM ('MANUAL', 'AUTOMATIC', 'SEMI-AUTOMATIC');
    END IF;
 
    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'drivetrain_type') THEN
-       CREATE TYPE drivetrain_type AS ENUM ('FWD', 'RWD', '4WD');
+       CREATE TYPE drivetrain_type AS ENUM ('FWD', 'RWD', '4WD', 'AWD', '2WD');
    END IF;
 
    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_type') THEN
@@ -67,6 +54,20 @@ CREATE TABLE IF NOT EXISTS CarSpecs (
     towing_capacity FLOAT,
     drivetrain drivetrain_type,
     transmission transmission_type
+);
+
+CREATE TABLE IF NOT EXISTS Cars (
+    id SERIAL PRIMARY KEY,
+    make VARCHAR(32) REFERENCES CarLogos(make),
+    specs INT REFERENCES CarSpecs(id),
+    model VARCHAR(32),
+    year INT
+);
+
+CREATE TABLE IF NOT EXISTS CarBodyTypes (
+    id SERIAL PRIMARY KEY,
+    car_id INT NOT NULL REFERENCES Cars(id),
+    body_type VARCHAR(64)
 );
 
 CREATE TABLE IF NOT EXISTS Users (

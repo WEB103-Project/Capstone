@@ -1,0 +1,72 @@
+{
+    "Australia": {
+        "Ford Australia": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg"
+    },
+    "Germany": {
+        "Audi": "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg",
+        "BMW": "https://upload.wikimedia.org/wikipedia/commons/7/73/Logo_BMW_Group_2021.svg",
+        "Mercedes-Benz": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Mercedes-Benz_Logo_2010.svg",
+        "Porsche": "https://upload.wikimedia.org/wikipedia/en/8/8c/Porsche_logo.svg",
+        "Smart": "https://upload.wikimedia.org/wikipedia/commons/7/79/Smart_2022.svg",
+        "Volkswagen": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg",
+        "Maybach": "https://upload.wikimedia.org/wikipedia/en/e/e7/Maybach_%28logo%29.png"
+    },
+    "Italy": {
+        "Alfa Romeo": "https://upload.wikimedia.org/wikipedia/en/2/2a/Alfa_Romeo_logo.png",
+        "Ferrari": "https://upload.wikimedia.org/wikipedia/en/3/36/Prancing_horse.svg",
+        "Fiat": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Fiat_logo23.png",
+        "Lamborghini": "https://upload.wikimedia.org/wikipedia/en/d/df/Lamborghini_Logo.svg",
+        "Maserati": "https://upload.wikimedia.org/wikipedia/commons/7/78/Maserati_logo_2.svg"
+    },
+    "Japan": {
+        "Acura": "https://upload.wikimedia.org/wikipedia/commons/a/af/Acura_logo.svg",
+        "Daihatsu": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Daihatsu_motor_co_logo.png",
+        "Honda": "https://upload.wikimedia.org/wikipedia/commons/7/76/Honda_logo.svg",
+        "Infiniti": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Infiniti_logo_2023.svg",
+        "Isuzu": "https://upload.wikimedia.org/wikipedia/commons/4/49/Isuzu.svg",
+        "Lexus": "https://upload.wikimedia.org/wikipedia/commons/7/75/Lexus.svg",
+        "Mazda": "https://upload.wikimedia.org/wikipedia/en/1/18/Mazda_logo_with_emblem.svg",
+        "Mitsubishi Motors": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Mitsubishi_motors_new_logo.svg",
+        "Nissan": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Nissan_Motor_Corporation_2020_logo-local_file.svg",
+        "Subaru": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Subaru_logo_%28transparent%29.svg",
+        "Suzuki": "https://upload.wikimedia.org/wikipedia/commons/1/12/Suzuki_logo_2.svg",
+        "Toyota": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Toyota.svg"
+    },
+    "South Korea": {
+        "Daewoo Bus": "https://upload.wikimedia.org/wikipedia/en/d/d1/Zyle_daewoo_bus_logo.png",
+        "Genesis": "https://upload.wikimedia.org/wikipedia/en/8/83/Genesis_division_emblem.svg",
+        "Hyundai": "https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg",
+        "Kia": "https://upload.wikimedia.org/wikipedia/commons/b/b6/KIA_logo3.svg"
+    },
+    "Sri Lanka": {
+        "Polestar": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Polestar_Logo.svg",
+        "Volvo Buses": "https://upload.wikimedia.org/wikipedia/commons/2/29/Volvo-Iron-Mark-Black.svg"
+    },
+    "United Kingdom": {
+        "Aston Martin": "https://upload.wikimedia.org/wikipedia/en/b/bd/Aston_Martin_Lagonda_brand_logo.png",
+        "Bentley": "https://upload.wikimedia.org/wikipedia/en/e/e4/Bentley_logo_2.svg",
+        "Jaguar": "https://upload.wikimedia.org/wikipedia/commons/7/72/Jaguar_-_sign_%28color%29.jpg",
+        "Land Rover": "https://upload.wikimedia.org/wikipedia/en/4/4a/LandRover.svg",
+        "Lotus": "https://upload.wikimedia.org/wikipedia/en/2/2f/Lotus_Cars_logo.svg",
+        "McLaren": "https://upload.wikimedia.org/wikipedia/en/4/45/McLaren_logo.svg",
+        "Rolls-Royce": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Rolls_royce_motorcars_logo.svg"
+    },
+    "United States": {
+        "Buick": "https://upload.wikimedia.org/wikipedia/en/2/2f/Buick_logo_2023.svg",
+        "Cadillac": "https://upload.wikimedia.org/wikipedia/en/e/ed/Cadillac_logo21.png",
+        "Chevrolet": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Chevrolet_bowtie_2023.svg",
+        "Chrysler": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Stellantis.svg",
+        "Dodge": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Dodge_black_logo.svg",
+        "Fisker": "https://upload.wikimedia.org/wikipedia/en/5/57/Fisker_logo.png",
+        "Freightliner": "https://upload.wikimedia.org/wikipedia/en/d/dc/Freightliner_Trucks_logo.svg",
+        "GMC": "https://upload.wikimedia.org/wikipedia/commons/f/f9/GMC-Logo_2.svg",
+        "Lincoln": "https://upload.wikimedia.org/wikipedia/commons/7/77/Logo_Lincoln.svg",
+        "Lucid Motors": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Lucid_Motors_logo.svg",
+        "Panoz": "https://upload.wikimedia.org/wikipedia/en/8/8a/Panozlogo.png",
+        "Rivian": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Rivian_logo_and_wordmark.svg",
+        "Tesla": "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg"
+    },
+    "Vietnam": {
+        "VinFast": "https://upload.wikimedia.org/wikipedia/commons/4/43/VinFast_logo_%28simple_variant%29.svg"
+    }
+}

@@ -89,7 +89,7 @@ def insert_car(connection, make, model, year, specs_id):
         return existing_car
 
     insert_command = """
-    INSERT INTO Cars (make, model, year) VALUES ('{}', '{}', {}, {}) RETURNING id;
+    INSERT INTO Cars (make, model, year, specs) VALUES ('{}', '{}', {}, {}) RETURNING id;
     """.format(
         make, model, year, specs_id
     )
@@ -205,9 +205,10 @@ def insert_pictures(connection, picture_gal: list, car_id):
         VALUES ({}, {})
         RETURNING id;
         """.format(
-            i, gallery_id
+            i, gallery_id[0][0]
         )
-        pic_list.append(run_sql_commands(command, command))
+        pic_list.append(run_sql_commands(connection, command))
+
 
 def insert_car_specs(
     connection,
@@ -223,8 +224,16 @@ def insert_car_specs(
     check_command = """
     SELECT id FROM CarSpecs WHERE performance = {} AND mileage = {} AND volume = {} AND seats = {} 
     AND wheel_base = {} AND towing_capacity = {} AND drivetrain = '{}' AND transmission = '{}';
-    """.format(performance_id, mileage_id, volume_id, seats, wheel, capacity, drivetrain, transmission)
-    
+    """.format(
+        performance_id,
+        mileage_id,
+        volume_id,
+        seats,
+        wheel,
+        capacity,
+        drivetrain,
+        transmission,
+    )
 
     # Run the check command with parameters
     existing = run_sql_commands(connection, check_command)
@@ -238,11 +247,19 @@ def insert_car_specs(
     (performance, mileage, volume, seats, wheel_base, towing_capacity, drivetrain, transmission)
     VALUES ({}, {}, {}, {}, {}, {}, '{}', '{}')
     RETURNING id;
-    """.format(performance_id, mileage_id, volume_id, seats, wheel, capacity, drivetrain, transmission)
+    """.format(
+        performance_id,
+        mileage_id,
+        volume_id,
+        seats,
+        wheel,
+        capacity,
+        drivetrain,
+        transmission,
+    )
 
     # Run the insert command with parameters
     return run_sql_commands(connection, command)
-
 
 
 def prepare_data_tables(
@@ -257,6 +274,10 @@ def prepare_data_tables(
         else None
     )
 
+    format = lambda make: " ".join(
+        [word if word.isupper() else word.title() for word in make.split()]
+    ).replace("-", " ")
+
     with open(json_logo, mode="r", encoding="utf-8") as json_file:
         for country in ijson.items(json_file, ""):
             for trim, make_dict in country.items():
@@ -268,13 +289,14 @@ def prepare_data_tables(
     with open(json_car, mode="r") as json_file:
         for car in ijson.items(json_file, "item"):
 
-            make = car.get("make").title().replace("-", " ")
-            model = car.get("model").title().replace("-", " ")
+            make = format(car.get("make"))
+            model = format(car.get("model"))
             year = car.get("year")
 
             data = car.get("data", {})
             car_specs = {}
             body_types = []
+            pics = []
             for trim, specs in data.items():
                 if "Dimensions, Weights & Capacities" == trim:
                     if specs.get("Truck Bed Volume"):
@@ -321,14 +343,22 @@ def prepare_data_tables(
                     ]
                 ):
                     body_types.append(trim)
-            
+                elif "gallery" == trim:
+                    for i in specs.items():
+                        pics.append(i)
+
             mileage_id = insert_mileage(
-                connection, car_specs.get("mpg_city", 0), car_specs.get("mpg_highway", 0)
+                connection,
+                car_specs.get("mpg_city", 0),
+                car_specs.get("mpg_highway", 0),
             )
             if mileage_id:
                 mileage_id = mileage_id[0][0]
             performance_id = insert_performance(
-                connection, car_specs.get("hp"), car_specs.get("torque"), car_specs.get("engine")
+                connection,
+                car_specs.get("hp"),
+                car_specs.get("torque"),
+                car_specs.get("engine"),
             )
             if performance_id:
                 performance_id = performance_id[0][0]
@@ -345,12 +375,24 @@ def prepare_data_tables(
             if space_volume_id:
                 space_volume_id = space_volume_id[0][0]
 
-            specs_id = insert_car_specs(connection, performance_id, mileage_id, space_volume_id, car_specs["ms"], car_specs["wb"], car_specs["cargo"], car_specs["drivetrain"], car_specs["transmission"])
+            specs_id = insert_car_specs(
+                connection,
+                performance_id,
+                mileage_id,
+                space_volume_id,
+                car_specs["ms"],
+                car_specs["wb"],
+                car_specs["cargo"],
+                car_specs["drivetrain"],
+                car_specs["transmission"],
+            )
             if specs_id:
                 specs_id = specs_id[0][0]
             car_id = insert_car(connection, make, model, year, specs_id)
             if car_id:
                 car_id = car_id[0][0]
             print(car_id)
+
+            insert_pictures(connection, pics, car_id)
 
         json_file.close()

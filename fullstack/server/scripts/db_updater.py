@@ -48,15 +48,15 @@ def run_sql_commands(
             cursor.execute(sql_commands)
 
             if cursor.description:
-                # If the command is a `SELECT`, fetch all results
+                # If the command is a SELECT, fetch all results
                 results = cursor.fetchall()
                 print("Query results:", results)
             elif sql_commands.strip().upper().startswith("INSERT"):
-                # For `INSERT`, return the ID of the inserted row if applicable
+                # For INSERT, return the ID of the inserted row if applicable
                 results = cursor.fetchone()[0] if cursor.rowcount > 0 else None
                 print("Inserted ID:", results)
             else:
-                # For other commands like `UPDATE` or `DELETE`, return row count
+                # For other commands like UPDATE or DELETE, return row count
                 results = cursor.rowcount
                 print(f"Rows affected: {results}")
             connection.commit()
@@ -67,10 +67,6 @@ def run_sql_commands(
         connection.rollback()
         print(f"❎ Error executing SQL commands: {e}")
         return None
-
-
-def upload_data_to_database(connection, sql_commands, dataframes_list):
-    pass
 
 
 def insert_car(connection, make, model, year, specs_id):
@@ -380,11 +376,11 @@ def prepare_data_tables(
                 performance_id,
                 mileage_id,
                 space_volume_id,
-                car_specs["ms"],
-                car_specs["wb"],
-                car_specs["cargo"],
-                car_specs["drivetrain"],
-                car_specs["transmission"],
+                car_specs.get("ms"),
+                car_specs.get("wb"),
+                car_specs.get("cargo"),
+                car_specs.get("drivetrain"),
+                car_specs.get("transmission"),
             )
             if specs_id:
                 specs_id = specs_id[0][0]

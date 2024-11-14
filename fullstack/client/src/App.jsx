@@ -14,12 +14,9 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/customcars",
-      element: <ViewCars title="BOLT BUCKET | Custom Cars" />,
-    },
-    {
-      path: "/customcars/:id",
-      element: <CarDetails title="BOLT BUCKET | View" />,
+      //hardcoding 2 instead of /:id for now
+      path: "/cardetails/2",
+      element: <CarDetails />,
     },
     {
       path: "/edit/:id",
@@ -27,13 +24,8 @@ function App() {
     },
     {
       path: "/:make",
-      element: <CarSearch />
+      element: <CarSearch />,
     },
-    {
-      path: "/comparecars",
-      element: <ViewCars/>,
-    },
-
   ]);
 
   return (

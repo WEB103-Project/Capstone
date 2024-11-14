@@ -1,24 +1,16 @@
 import React from "react";
 import {
   Button,
-  Pagination,
-  Checkbox,
-  Input,
-  Spacer,
   CardBody,
   CardFooter,
   CardHeader,
-  CheckboxGroup,
-  BreadcrumbItem,
   Card,
-  Breadcrumbs,
   Divider,
   Image,
-  Navbar,
-  NavbarItem,
 } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const CarInfoCard = () => {
   return (
@@ -26,7 +18,10 @@ const CarInfoCard = () => {
       <CardBody>
         <p>Body Type</p>
         <p>Year Make Model</p>
-        <Image src="https://file.kelleybluebookimages.com/kbb/base/evox/CP/54083/2024-Dodge-Durango-front_54083_032_1847x841_PCQ_cropped.png?downsize=300:*"/>
+        <Image
+          src="https://file.kelleybluebookimages.com/kbb/base/evox/CP/54083/2024-Dodge-Durango-front_54083_032_1847x841_PCQ_cropped.png?downsize=300:*"
+          alt="Car Image"
+        />
         <Divider />
         <CardHeader>
           <FontAwesomeIcon icon={faStar} />
@@ -38,14 +33,19 @@ const CarInfoCard = () => {
         </CardHeader>
         <Divider />
         <div className="flex">
-            <p>45 MPG</p>
-            <p>Combined Fuel Economy</p>
+          <p>45 MPG</p>
+          <p>Combined Fuel Economy</p>
         </div>
-        <p>The Make Model is avalue of choice in Bodytype SUVs packing a lot of storage for a small size. It has a premium interior, a lively turbocharged engine and tons of standard tech features for the modern family</p>
-        
+        <p>
+          The Dodge Durango is a value-packed choice among SUVs, offering ample
+          storage, a premium interior, a lively turbocharged engine, and plenty
+          of tech features for the modern family.
+        </p>
       </CardBody>
       <CardFooter>
-        <Button>More Details</Button>
+        <Link to="/cardetails/2">
+          <Button>More Details</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

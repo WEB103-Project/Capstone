@@ -17,20 +17,20 @@ This unit, be sure to complete all tasks listed below. To complete a task, place
 
 We got the scraper to work to get data from KBB. Once we acquired our data, we created database scripts to create and populate our database with tables. We inserted data into these tables. This helped us especially with having real, usable data. This setup our backend pretty well. 
 
-We got some features added to our frontend. We can display car cards on our frontend.
+We got some features added to our frontend. We can display car cards on our frontend. We created our landing page. We created a detailed car page. We created multiple pages in our React app so React routing exists. Clicking on "more details" on one page can take you to the next page.
 
 ### 2. What were some challenges your group faced in this unit?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Some challenges are group faced was timing and coordinating backend with frontend. This project is backend-heavy and is most efficient if the backend finished all the data work to allow the frontend to work with it. HOWEVER, since we are using real data scraped from websites, the backend work is A LOT MORE and A LOT MORE COMPLEX as well. This was a big challenge because initially we thought we could split the project down the middle. As we near the end of the project, we realized that the way we planned out tasks and our features didn't account for this.
 
 ### Did you finish all of your tasks in your sprint plan for this week? If you did not finish all of the planned tasks, how would you prioritize the remaining tasks on your list?
 
-[👉🏾👉🏾👉🏾 your answer here]
+Yes, we finished all our tasks.
 
 ### Which features and user stories would you consider “at risk”? How will you change your plan if those items remain “at risk”?
 
-[👉🏾👉🏾👉🏾 your answer here]
+N/A. We don't consider any features at risk. We'll continue developing the rest of our features out.
 
 ### 5. What additional support will you need in upcoming units as you continue to work on your final project?
 
-[👉🏾👉🏾👉🏾 your answer here]
+We'd like to get feedback from our Tech Fellow and any other classmates or stakeholders as we build the rest of the app out.

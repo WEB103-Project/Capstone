@@ -16,6 +16,24 @@ const getAllCars = async (req, res) => {
   }
 };
 
+// Get a single car by ID
+const getCar = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query("SELECT * FROM cars WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Car not found" });
+    }
+
+    res.json(result.rows[0]); // Send the found car data
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch car" });
+  }
+};
+
 // Create a new car
 const createCar = async (req, res) => {
   const { make, model, year, vin, color, price, mileage, car_type } = req.body;
@@ -41,4 +59,4 @@ const createCar = async (req, res) => {
   }
 };
 
-export default { getAllCars, createCar };
+export default { getAllCars, getCar,createCar };

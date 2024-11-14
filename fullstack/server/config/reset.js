@@ -15,11 +15,14 @@ const createCarsTable = async () => {
     
     CREATE TABLE IF NOT EXISTS cars (
       id SERIAL PRIMARY KEY,
-      model VARCHAR(255) NOT NULL,
       make VARCHAR(255) NOT NULL,
+      model VARCHAR(255) NOT NULL,
       year INTEGER NOT NULL,
+      vin VARCHAR(255) NOT NULL,
+      color VARCHAR(255) NOT NULL,
       price DECIMAL NOT NULL,
-      description TEXT NOT NULL
+      mileage INTEGER NOT NULL,
+      car_type VARCHAR(255) NOT NULL
     );
   `;
   try {
@@ -115,20 +118,26 @@ const createRepliesTable = async () => {
 const seedCarsTableWithData = async () => {
   await createCarsTable();
 
-  const insertQuery = `INSERT INTO cars (model, make, year, price, description) VALUES ($1, $2, $3, $4, $5)`;
+  // Build the query with the correct number of placeholders
+  const insertQuery = `
+    INSERT INTO cars (make, model, year, vin, color, price, mileage, car_type)
+    VALUES
+    ${cars.map((_, index) => `($${index * 8 + 1}, $${index * 8 + 2}, $${index * 8 + 3}, $${index * 8 + 4}, $${index * 8 + 5}, $${index * 8 + 6}, $${index * 8 + 7}, $${index * 8 + 8})`).join(', ')}
+  `;
+
+  // Flatten the cars array to match the query placeholders
+  const values = cars.flatMap(car => [
+    car.make, car.model, car.year, car.vin, car.color, car.price, car.mileage, car.car_type
+  ]);
 
   try {
-    for (const car of cars) {
-      const { model, make, year, price, description } = car;
-      const values = [model, make, year, price, description];
-      await pool.query(insertQuery, values);
-      console.log(`${model} has been inserted successfully`);
-    }
-    console.log("---All car data has been inserted successfully---");
+    await pool.query(insertQuery, values);
+    console.log("--- All car data has been inserted successfully ---");
   } catch (err) {
     console.error("Error inserting car data", err);
   }
 };
+
 
 const seedCarGalleriesTableWithData = async () => {
   await createCarGalleriesTable();
@@ -203,9 +212,9 @@ const seedRepliesTableWithData = async () => {
 };
 
 seedCarsTableWithData();
-seedCarGalleriesTableWithData();
-seedCarSpecsTableWithData();
-seedCarReviewsTableWithData();
-seedRepliesTableWithData();
+//seedCarGalleriesTableWithData();
+//seedCarSpecsTableWithData();
+//seedCarReviewsTableWithData();
+//seedRepliesTableWithData();
 
 

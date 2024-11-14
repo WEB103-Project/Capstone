@@ -3,25 +3,28 @@ import { useRoutes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import ViewCars from "./pages/ViewCars";
 import EditCar from "./pages/EditCar";
-import CreateCar from "./pages/CreateCar";
 import CarDetails from "./pages/CarDetails";
+import CarSearch from "./pages/CarSearch";
+import Home from "./pages/Home";
+
 function App() {
   let element = useRoutes([
     {
       path: "/",
-      element: <CreateCar title="BOLT BUCKET | Customize" />,
+      element: <Home />,
     },
     {
-      path: "/customcars",
-      element: <ViewCars title="BOLT BUCKET | Custom Cars" />,
-    },
-    {
-      path: "/customcars/:id",
-      element: <CarDetails title="BOLT BUCKET | View" />,
+      //hardcoding 2 instead of /:id for now
+      path: "/cardetails/2",
+      element: <CarDetails />,
     },
     {
       path: "/edit/:id",
       element: <EditCar title="BOLT BUCKET | Edit" />,
+    },
+    {
+      path: "/:make",
+      element: <CarSearch />,
     },
   ]);
 
@@ -29,7 +32,7 @@ function App() {
     <>
       <div className="flex flex-wrap gap-4 items-center">
         <Navigation />
-        <div>{element}</div>
+        <div className="w-full">{element}</div>
       </div>
     </>
   );

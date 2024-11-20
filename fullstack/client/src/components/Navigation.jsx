@@ -7,7 +7,7 @@ import {
   Link as NextUILink,
   NavbarItem,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom"; // Ensure this is imported
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
@@ -16,6 +16,12 @@ const Navigation = () => {
         <p className="font-bold text-inherit text-3xl">The Car Encyclopedia</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {/* Home Link */}
+        <NavbarItem>
+          <Link to="/" className="text-foreground">
+            Home
+          </Link>
+        </NavbarItem>
         <NavbarItem>
           <Link to="/viewcars" className="text-foreground">
             Find Cars

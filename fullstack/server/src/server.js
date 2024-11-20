@@ -1,8 +1,9 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
+import cors from "cors";
 
-import path from "path";
+// import path from "path";
 // const express = require('express');
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerJsDoc = require('swagger-jsdoc');
@@ -32,6 +33,7 @@ const swaggerOptions = {
 
 // Swagger setup
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use(cors());
 app.use("/apidoc", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/cars", carRouter);
 // app.use("/api/users", userRouter);

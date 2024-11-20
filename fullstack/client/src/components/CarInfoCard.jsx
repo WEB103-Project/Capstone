@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   CardBody,
@@ -12,38 +12,78 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const CarInfoCard = () => {
+const CarInfoCard = ({ id }) => {
+  const [car, setCar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCarDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:3002/api/cars/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch car details");
+        }
+        const data = await response.json();
+        setCar(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCarDetails();
+  }, [id]);
+
+  if (loading) {
+    return <p>Loading car details...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!car) {
+    return <p>No car details available.</p>;
+  }
+
   return (
     <Card className="max-w-[340px]">
       <CardBody>
-        <p>Body Type</p>
-        <p>Year Make Model</p>
+        <p>
+          <strong>Body Type:</strong> {car.car_type}
+        </p>
+        <p>
+          <strong>Year Make Model:</strong> {car.year} {car.make} {car.model}
+        </p>
         <Image
-          src="https://file.kelleybluebookimages.com/kbb/base/evox/CP/54083/2024-Dodge-Durango-front_54083_032_1847x841_PCQ_cropped.png?downsize=300:*"
-          alt="Car Image"
+          src={car.image || "https://via.placeholder.com/300"}
+          alt={`${car.make} ${car.model}`}
         />
         <Divider />
         <CardHeader>
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <p>5.0</p>
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <FontAwesomeIcon
+                key={i}
+                icon={faStar}
+                className={i < (car.rating || 5) ? "text-yellow-500" : ""}
+              />
+            ))}
+            <p className="ml-2">{car.rating || "5.0"}</p>
+          </div>
         </CardHeader>
         <Divider />
-        <div className="flex">
-          <p>45 MPG</p>
-          <p>Combined Fuel Economy</p>
+        <div className="flex justify-between">
+          <p>
+            <strong>Fuel Economy:</strong> {car.fuel_economy || "N/A"} MPG
+          </p>
         </div>
-        <p>
-          The Dodge Durango is a value-packed choice among SUVs, offering ample
-          storage, a premium interior, a lively turbocharged engine, and plenty
-          of tech features for the modern family.
-        </p>
+        <p className="mt-4">{car.description || "No description available."}</p>
       </CardBody>
       <CardFooter>
-        <Link to="/cardetails/2">
+        <Link to={`/cardetails/${car.id}`}>
           <Button>More Details</Button>
         </Link>
       </CardFooter>

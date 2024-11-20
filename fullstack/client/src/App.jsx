@@ -14,18 +14,14 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/cardetails/id",
+      path: "/cardetails/:id",
       element: <CarDetails />,
     },
-    // {
-    //   path: "/edit/:id",
-    //   element: <EditCar title="BOLT BUCKET | Edit" />,
-    // },
-    // {
-    //   path: "/:make",
-    //   element: <CarSearch />,
-    // },
-    { //navbar FindCars
+    {
+      path: "/:make",
+      element: <CarSearch />,
+    },
+    {
       path: "/viewcars",
       element: <ViewCars />,
     },

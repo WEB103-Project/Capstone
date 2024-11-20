@@ -14,18 +14,22 @@ function App() {
       element: <Home />,
     },
     {
-      //hardcoding 2 instead of /:id for now
-      path: "/cardetails/2",
+      path: "/cardetails/id",
       element: <CarDetails />,
     },
-    {
-      path: "/edit/:id",
-      element: <EditCar title="BOLT BUCKET | Edit" />,
+    // {
+    //   path: "/edit/:id",
+    //   element: <EditCar title="BOLT BUCKET | Edit" />,
+    // },
+    // {
+    //   path: "/:make",
+    //   element: <CarSearch />,
+    // },
+    { //navbar FindCars
+      path: "/viewcars",
+      element: <ViewCars />,
     },
-    {
-      path: "/:make",
-      element: <CarSearch />,
-    },
+
   ]);
 
   return (

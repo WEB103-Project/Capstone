@@ -8,9 +8,12 @@ import path from "path";
 // const swaggerJsDoc = require('swagger-jsdoc');
 // const path = require('path');
 
-// const carRouter = require('../routes/carRoutes.js')
 // Import routers
 import carRouter from "../routes/carRoutes.js";
+// import userRouter from "../routes/userRoutes.js";
+// import replyRouter from "../routes/carRepliesRoutes.js";
+// import reviewRouter from "../routes/carReviewRoutes.js";
+// import carLogoRouter from "../routes/logoRoutes.js";
 
 const app = express();
 const port = 3002;
@@ -31,6 +34,11 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/apidoc", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/cars", carRouter);
+// app.use("/api/users", userRouter);
+// app.use("/api/replies", replyRouter);
+// app.use("/api/review", reviewRouter);
+// app.use("/api/logo", carLogoRouter);
+
 
 // Sample route
 app.get("/api", (req, res) => {

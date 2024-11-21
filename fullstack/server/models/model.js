@@ -1,5 +1,16 @@
 export class Car {
-  constructor(id, make, model, year, vin, color, price, mileage, car_type) {
+  constructor(
+    id,
+    make,
+    model,
+    year,
+    vin,
+    color,
+    price,
+    mileage,
+    car_type,
+    specs 
+  ) {
     this.id = id;
     this.make = make;
     this.model = model;
@@ -9,5 +20,6 @@ export class Car {
     this.price = price;
     this.mileage = mileage;
     this.car_type = car_type;
+    this.specs = specs; 
   }
 }

@@ -25,7 +25,7 @@ export default carRouter;
  * @swagger
  * /cars:
  *   get:
- *     summary: Retrieve a list of all cars
+ *     summary: Retrieve a list of all cars with detailed specifications
  *     responses:
  *       200:
  *         description: A list of cars
@@ -36,17 +36,89 @@ export default carRouter;
  *               items:
  *                 type: object
  *                 properties:
- *                   model:
- *                     type: string
+ *                   id:
+ *                     type: integer
+ *                     description: The unique identifier for the car
  *                   make:
  *                     type: string
+ *                     description: The car's manufacturer
+ *                   model:
+ *                     type: string
+ *                     description: The car's model
  *                   year:
  *                     type: integer
+ *                     description: The manufacturing year of the car
  *                   price:
  *                     type: number
- *                   description:
+ *                     description: The price of the car
+ *                   performance:
  *                     type: string
+ *                     description: The performance description of the car
+ *                   mileage:
+ *                     type: string
+ *                     description: The overall mileage of the car
+ *                   volume:
+ *                     type: string
+ *                     description: The volume of the car's interior
+ *                   seats:
+ *                     type: integer
+ *                     description: The number of seats in the car
+ *                   wheelBase:
+ *                     type: string
+ *                     description: The car's wheelbase dimensions
+ *                   towingCapacity:
+ *                     type: string
+ *                     description: The car's towing capacity
+ *                   drivetrain:
+ *                     type: string
+ *                     description: The type of drivetrain (e.g., FWD, AWD)
+ *                   transmission:
+ *                     type: string
+ *                     description: The car's transmission type
+ *                   horsepower:
+ *                     type: integer
+ *                     description: The horsepower of the car's engine
+ *                   torque:
+ *                     type: string
+ *                     description: The torque of the car's engine
+ *                   engine:
+ *                     type: string
+ *                     description: The type of engine in the car
+ *                   cityMileage:
+ *                     type: string
+ *                     description: The city mileage of the car
+ *                   highwayMileage:
+ *                     type: string
+ *                     description: The highway mileage of the car
+ *                   cargoCapacity:
+ *                     type: string
+ *                     description: The car's cargo capacity
+ *                   frontHeadRoom:
+ *                     type: string
+ *                     description: The headroom space in the front
+ *                   frontLegRoom:
+ *                     type: string
+ *                     description: The legroom space in the front
+ *                   frontShoulderRoom:
+ *                     type: string
+ *                     description: The shoulder room space in the front
+ *                   curbWeight:
+ *                     type: string
+ *                     description: The curb weight of the car
+ *                   overallWidth:
+ *                     type: string
+ *                     description: The overall width of the car
+ *                   overallLength:
+ *                     type: string
+ *                     description: The overall length of the car
+ *                   galleryCarId:
+ *                     type: integer
+ *                     description: The ID of the car in the gallery
+ *                   logoCarUrl:
+ *                     type: string
+ *                     description: URL for the car's logo
  */
+
 
 /**
  * @swagger

@@ -16,7 +16,6 @@ const Navigation = () => {
         <p className="font-bold text-inherit text-3xl">The Car Encyclopedia</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {/* Home Link */}
         <NavbarItem>
           <Link to="/" className="text-foreground">
             Home
@@ -36,13 +35,24 @@ const Navigation = () => {
       <NavbarContent justify="end">
         <NavbarItem>
           <Button
-            as={NextUILink} // Use NextUI's Link for external or styled links
+            as={NextUILink}
             radius="sm"
             className="border-[#191A23] text-[#191A23]"
-            href="#"
+            href="/signup" // Navigate to Signup
             variant="bordered"
           >
             Sign Up
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button
+            as={NextUILink}
+            radius="sm"
+            className="border-[#191A23] text-[#191A23]"
+            href="/login" // Navigate to Login
+            variant="bordered"
+          >
+            Login
           </Button>
         </NavbarItem>
       </NavbarContent>

@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "react-dotenv && vite",
-    "build": "react-dotenv && vite build",
-    "serve": "react-dotenv && serve build",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "serve build",
     "lint": "eslint .",
     "start": "npm install -g serve && serve -s dist",
     "preview": "vite preview",

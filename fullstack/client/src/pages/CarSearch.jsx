@@ -20,7 +20,7 @@ function CarSearch() {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await fetch("http://localhost:3002/api/cars");
+        const response = await fetch("https://the-car-encyclopedia-api.onrender.com/api/cars");
         const data = await response.json();
         setCars(data);
         setFilteredCars(data); // Initially display all cars
